@@ -11,6 +11,8 @@ class DefaultController extends Controller
     {
         $offers = $this->get('repository.offer')->findBy([
             'viewed' => false,
+        ], [
+            'createdAt' => 'DESC',
         ]);
 
         return $this->render('AppBundle:Default:index.html.twig', [

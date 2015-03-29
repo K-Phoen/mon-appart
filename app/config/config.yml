@@ -72,3 +72,8 @@ swiftmailer:
     password:  "%mailer_password%"
     encryption: ssl
     spool:     { type: memory }
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
