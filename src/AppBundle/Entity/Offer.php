@@ -76,6 +76,11 @@ class Offer
      */
     private $includes_furnitures;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $viewed = false;
+
     public static function fromArray(array $data)
     {
         $offer = new static();
@@ -437,5 +442,28 @@ class Offer
     public function getArea()
     {
         return $this->area;
+    }
+
+    /**
+     * Set viewed
+     *
+     * @param boolean $viewed
+     * @return Offer
+     */
+    public function setViewed($viewed)
+    {
+        $this->viewed = $viewed;
+
+        return $this;
+    }
+
+    /**
+     * Get viewed
+     *
+     * @return boolean
+     */
+    public function getViewed()
+    {
+        return $this->viewed;
     }
 }

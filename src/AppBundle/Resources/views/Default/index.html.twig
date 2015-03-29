@@ -11,12 +11,16 @@
     </div>
 
     <div class="large-8 columns">
-        <h5><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
+        <div class="clearfix">
+            <h5 class="left"><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
+            <span class="right"><a class="close" href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}">×</a></span>
+        </div>
 
         <p>
             {{ offer.rooms }} pièces - {{ offer.area }} m² - {{ offer.price }} € - {{ offer.city }} - {{ offer.zipCode }}<br />
             {{ offer.pictures|length }} photos supplémentaires<br />
 
+            <span class="label secondary">{{ offer.origin|capitalize }}</span>
             {% if offer.includesFurnitures %}<span class="label info">Meublé</span>{% endif %}
             {% if offer.includingCharges %}<span class="label success">Charge incluses</span>{% else %}<span class="label alert">Hors charges</span>{% endif %}
         </p>

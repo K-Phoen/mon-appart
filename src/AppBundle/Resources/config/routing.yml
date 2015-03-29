@@ -1,4 +1,7 @@
 home:
     path:         /
     defaults:     { _controller: AppBundle:Default:index }
-    requirements: { _method: GET }
+
+flag_offer_as_viewed:
+    path:         /flag-as-viewed
+    defaults:     { _controller: AppBundle:Default:flagAsView }
