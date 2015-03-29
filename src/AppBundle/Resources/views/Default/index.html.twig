@@ -1,6 +1,7 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
+<h3>{{ offers|length }} annonces</h3>
 
 {% for offer in offers %}
 <div class="row" style="margin-bottom: 10px;">
@@ -17,7 +18,7 @@
     <div class="large-8 columns">
         <div class="clearfix">
             <h5 class="left"><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
-            <span class="right"><a class="close" href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}">×</a></span>
+            <span class="right"><a style="font-weight: bold; font-size: 110%;" class="close" href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}">×</a></span>
         </div>
 
         <p>
@@ -31,10 +32,12 @@
             {% endif %}
         </p>
 
-        <blockquote style="font-size:90%">
+        <blockquote style="font-size:90%; border:none; padding-left:0">
             {{ offer.description|raw }}
         </blockquote>
     </div>
+
+    <hr />
 </div>
 {% else %}
 <p>Bah non.</p>
