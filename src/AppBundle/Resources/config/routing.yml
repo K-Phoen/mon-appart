@@ -1,0 +1,4 @@
+home:
+    path:         /
+    defaults:     { _controller: controller.default:indexAction }
+    requirements: { _method: GET }

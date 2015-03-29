@@ -2,16 +2,22 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Templating\EngineInterface as Templating;
 
-class DefaultController extends Controller
+class DefaultController
 {
     /**
-     * @Route("/app/example", name="homepage")
+     * @var Templating $templating
      */
+    protected $templating;
+
+    public function __construct(Templating $templating)
+    {
+        $this->templating = $templating;
+    }
+
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        return $this->templating->renderResponse('AppBundle:Default:index.html.twig');
     }
 }

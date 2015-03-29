@@ -1,0 +1,4 @@
+services:
+    controller.default:
+        class:      AppBundle\Controller\DefaultController
+        arguments:  [ @templating ]

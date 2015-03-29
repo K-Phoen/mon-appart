@@ -1,0 +1,40 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+<h1>FAQ</h1>
+
+<ul>
+    <li><a href="#why">Pourquoi ?</a></li>
+    <li><a href="#by-who">Par qui, pour qui ?</a></li>
+    <li><a href="#criteria">Pourquoi ces critères ?</a></li>
+</ul>
+
+<h2 id="why">Pourquoi ?</h2>
+<p>
+    Il n'est pas rare qu'un étudiant en recherche de stage ou qu'un dévelopeur
+    souhaitant changer de région (par exemple) ne sache pas où commencer ses
+    recherches. Dans cette optique, <em>Comment ça dev ?</em> propose un
+    référentiel d'entreprises liées aux nouvelles technologies ainsi que
+    quelques indicateurs permettant au chercheur de se faire une première idée
+    de leurs méthodes de travail.
+</p>
+
+<h2 id="by-who">Par qui, pour qui ?</h2>
+<p>
+    Par des dévelopeurs, pour des dévelopeurs. Objectif <em>no bullshit <a href="https://www.gandi.net/"><sup>TM</sup></a></em>.<br />
+    Tout l'intérêt repose sur des évaluations faites par des personnes ayant une
+    connaissance réelle des méthodes de travail des entreprises : les dévelopeurs
+    eux-mêmes.
+</p>
+
+<h2 id="criteria">Pourquoi ces critères ?</h2>
+<p>
+    Les critères utilisés par <em>Comment ça dev ?</em> se veulent les
+    plus objectifs et indépendants des choix technologiques possible, sans
+    pour autant viser l'exhaustivité.<br />
+    Il se trouve que le <em><a href="http://fr.wikipedia.org/wiki/Test_de_Jo%C3%ABl">Joel Test</a></em>,
+    dont sont issus les critères, vise justement à proposer des
+    indicateurs offrant un premier aperçu de la qualité d'une équipe de
+    développement.
+</p>
+{% endblock %}

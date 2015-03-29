@@ -33,8 +33,8 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
+    use_controller: "%kernel.debug%"
+    bundles:        [ AppBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

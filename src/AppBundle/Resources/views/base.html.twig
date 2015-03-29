@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Tu veux un appart ?{% endblock %}</title>
+
+    {% block stylesheets %}
+      {% stylesheets
+        '@AppBundle/Resources/public/css/vendor/foundation.css'
+      %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+      {% endstylesheets %}
+    {% endblock %}
+</head>
+<body>
+<div class="row">
+    <div class="large-12 columns">
+        <h1>Tu veux un appart ?</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+{% block javascripts %}
+  {% javascripts
+    '@AppBundle/Resources/public/js/vendor/jquery.js'
+    '@AppBundle/Resources/public/js/vendor/foundation.min.js'
+  %}
+  <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+<script>
+  $(document).foundation();
+</script>
+</body>
+</html>
