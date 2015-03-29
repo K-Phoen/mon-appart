@@ -28,6 +28,11 @@ class OffersFetchedListener implements EventSubscriberInterface
     public function onOffersFetched(GenericEvent $event)
     {
         $offers  = $event->getSubject();
+
+        if (count($offers) === 0) {
+            return;
+        }
+
         $message = $this->getMessage($offers);
 
         $this->mailer->send($message);

@@ -135,6 +135,11 @@ class Offer
         return $offer;
     }
 
+    public function getUrl()
+    {
+        return $this->id;
+    }
+
     /**
      * Set id
      *

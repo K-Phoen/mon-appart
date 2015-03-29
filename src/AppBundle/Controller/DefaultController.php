@@ -2,22 +2,16 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\Templating\EngineInterface as Templating;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController
+class DefaultController extends Controller
 {
-    /**
-     * @var Templating $templating
-     */
-    protected $templating;
-
-    public function __construct(Templating $templating)
-    {
-        $this->templating = $templating;
-    }
-
     public function indexAction()
     {
-        return $this->templating->renderResponse('AppBundle:Default:index.html.twig');
+        $offers = $this->get('repository.offer')->findAll();
+
+        return $this->render('AppBundle:Default:index.html.twig', [
+            'offers' => $offers,
+        ]);
     }
 }

@@ -1,4 +1,4 @@
 home:
     path:         /
-    defaults:     { _controller: controller.default:indexAction }
+    defaults:     { _controller: AppBundle:Default:index }
     requirements: { _method: GET }
