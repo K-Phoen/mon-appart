@@ -91,6 +91,9 @@ class Leboncoin
         // pictures
         $data['pictures'] = [];
 
+        // description
+        $data['description'] = $crawler->filter('.AdviewContent .content')->html();
+
         if (preg_match_all('`aImages\[\d+\] = "([^"]+)";`', $html, $matches)) {
             $data['pictures'] = $matches[1];
         }

@@ -26,6 +26,10 @@
                 {% if offer.includingCharges %}<span class="label success">Charge incluses</span>{% else %}<span class="label alert">Hors charges</span>{% endif %}
             {% endif %}
         </p>
+
+        <blockquote style="font-size:90%">
+            {{ offer.description|raw }}
+        </blockquote>
     </div>
 </div>
 {% endfor %}

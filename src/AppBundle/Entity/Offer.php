@@ -62,6 +62,11 @@ class Offer
     private $thumb = '';
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $description = '';
+
+    /**
      * @ORM\Column(type="array")
      */
     private $pictures = [];
@@ -127,6 +132,10 @@ class Offer
 
         if (!empty($data['zip_code'])) {
             $offer->setZipCode($data['zip_code']);
+        }
+
+        if (!empty($data['description'])) {
+            $offer->setDescription($data['description']);
         }
 
         if (array_key_exists('including_charges', $data)) {
@@ -465,5 +474,28 @@ class Offer
     public function getViewed()
     {
         return $this->viewed;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Offer
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
