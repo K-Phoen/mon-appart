@@ -4,7 +4,7 @@ namespace Crawler;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-class Leboncoin
+class Leboncoin implements OfferCrawler
 {
     private $criteriaMap = [
         'area_min'   => 'buildAreaMinCriteria',
@@ -44,17 +44,6 @@ class Leboncoin
         return $resultLinks;
     }
 
-    public function fetchLinks(array $links)
-    {
-        $results = [];
-
-        foreach ($links as $link) {
-            $results[] = $this->fetchLink($link);
-        }
-
-        return $results;
-    }
-
     public function fetchLink($link)
     {
         $html    = $this->fetchUrlContent($link);
@@ -88,12 +77,11 @@ class Leboncoin
         // main picture
         $data['thumb'] = $crawler->filter('meta[property="og:image"]')->attr('content');
 
-        // pictures
-        $data['pictures'] = [];
-
         // description
         $data['description'] = $crawler->filter('.AdviewContent .content')->html();
 
+        // pictures
+        $data['pictures'] = [];
         if (preg_match_all('`aImages\[\d+\] = "([^"]+)";`', $html, $matches)) {
             $data['pictures'] = $matches[1];
         }
@@ -103,9 +91,6 @@ class Leboncoin
 
     private function buildSearchUrl(array $criteria)
     {
-        $region = $criteria['region'];
-        unset($criteria['region']);
-
         $filters = [];
         foreach ($criteria as $name => $value) {
             if (!isset($this->criteriaMap[$name])) {
@@ -116,8 +101,7 @@ class Leboncoin
         }
 
         return sprintf(
-            'http://www.leboncoin.fr/locations/offres/%s/?f=a&th=1&%s',
-            $region,
+            'http://www.leboncoin.fr/locations/offres/rhone_alpes/?f=a&th=1&%s',
             http_build_query($filters)
         );
     }
