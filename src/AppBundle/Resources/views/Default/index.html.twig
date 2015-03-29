@@ -6,13 +6,15 @@
 {% for offer in offers %}
 <div class="row" style="margin-bottom: 10px;">
     <div class="large-4 columns">
-        <a class="th [radius]" href="{{ offer.url }}">
-            {% if offer.thumb %}
-                <img src="{{ offer.thumb }}" />
-            {% else %}
-                <img src="http://placehold.it/640x480" />
-            {% endif %}
-        </a>
+        {% if offer.pictures|length > 0 %}
+            <ul class="example-orbit" data-orbit  data-options="animation_speed:400;timer:false;">
+                {% for picture in offer.pictures %}
+                <li><img src="{{ picture }}" /></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <img src="http://placehold.it/640x480" />
+        {% endif %}
     </div>
 
     <div class="large-8 columns">
@@ -32,9 +34,9 @@
             {% endif %}
         </p>
 
-        <blockquote style="font-size:90%; border:none; padding-left:0">
+        <p class="panel">
             {{ offer.description|raw }}
-        </blockquote>
+        </p>
     </div>
 
     <hr />

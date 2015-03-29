@@ -25,5 +25,18 @@
         {% block body %}{% endblock %}
     </div>
 </div>
+
+{% block javascripts %}
+  {% javascripts
+    '@AppBundle/Resources/public/js/vendor/jquery.js'
+    '@AppBundle/Resources/public/js/vendor/foundation.min.js'
+  %}
+  <link rel="stylesheet" href="" />
+  <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+  <script>
+    $(document).foundation();
+  </script>
+{% endblock %}
 </body>
 </html>
