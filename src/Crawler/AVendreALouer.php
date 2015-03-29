@@ -42,7 +42,10 @@ class AVendreALouer implements OfferCrawler
         $data['description'] = trim($crawler->filter('#propertyDesc .more')->html());
 
         // zip code
-        $data['zip_code'] = $this->regexSearch('`TownCode":"([^"]+)"`', $html);
+        $data['zip_code'] = $this->regexSearch('`"TownCode":"([^"]+)"`', $html);
+
+        // city
+        $data['city'] = $this->regexSearch('`"TownName":"([^"]+)"`', $html);
 
         // rooms
         $data['rooms'] = $this->regexSearch('`"RoomCount":(\d+)`', $html);
@@ -53,13 +56,17 @@ class AVendreALouer implements OfferCrawler
         // price
         $data['price'] = $this->regexSearch('`"Price":(\d+)`', $html);
 
+        // including charges
+        $priceTag = $crawler->filter('.topSummary .display-price')->text();
+        $data['including_charges'] = strpos($priceTag, 'CC') !== false;
+
         // pictures
         $data['pictures'] = $crawler->filter('.slideCtnr img')->each(function($node) {
             return $node->attr('src');
         });
         $data['thumb'] = empty($data['pictures']) ? null : $data['pictures'][0];
 
-        return array_filter($data);
+        return $data;
     }
 
     private function buildSearchUrl(array $criteria)
@@ -71,13 +78,13 @@ class AVendreALouer implements OfferCrawler
         ];
         $httpParams = [];
 
-        foreach ($params as $param => $value) {
-            if (empty($criteria[$param])) {
+        foreach ($criteria as $name => $value) {
+            if (empty($params[$name])) {
                 continue;
             }
 
-            $httpParams[$criteria[$param]] = $value;
-            unset($criteria[$param]);
+            $httpParams[$params[$name]] = $value;
+            unset($criteria[$name]);
         }
 
         foreach ($criteria as $name => $value) {
