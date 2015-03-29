@@ -79,9 +79,11 @@ class Leboncoin
             }
         });
 
-        // fix area and rooms
-        $data['area'] = isset($data['area']) ? intval($data['area']) : null;
-        $data['rooms'] = isset($data['rooms']) ? intval($data['rooms']) : null;
+        // fix a few params
+        $data['area']                = isset($data['area']) ? intval($data['area']) : null;
+        $data['rooms']               = isset($data['rooms']) ? intval($data['rooms']) : null;
+        $data['includes_furnitures'] = isset($data['includes_furnitures']) ? $data['includes_furnitures'] === 'Meublé' : null;
+        $data['including_charges']   = isset($data['including_charges']) ? $data['including_charges'] === 'Oui' : null;
 
         // main picture
         $data['thumb'] = $crawler->filter('meta[property="og:image"]')->attr('content');

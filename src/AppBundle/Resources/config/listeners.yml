@@ -1,0 +1,6 @@
+services:
+    listener.offers.fetched:
+        class:      AppBundle\EventListener\OffersFetchedListener
+        arguments:  [ @mailer ]
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1,0 +1,6 @@
+services:
+    repository.offer:
+        class:              Doctrine\ORM\EntityRepository
+        factory_service:    doctrine.orm.entity_manager
+        factory_method:     getRepository
+        arguments:          [ 'AppBundle:Offer' ]
