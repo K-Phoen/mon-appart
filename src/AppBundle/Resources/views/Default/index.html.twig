@@ -20,7 +20,15 @@
     <div class="large-8 columns">
         <div class="clearfix">
             <h5 class="left"><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
-            <span class="right"><a style="font-weight: bold; font-size: 110%;" class="close" href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}">×</a></span>
+            <span class="right">
+                {% if offer.starred %}
+                    <a style="font-weight: bold; font-size: 110%;" class="close" href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-star"></i></a>
+                {% else %}
+                    <a style="font-weight: bold; font-size: 110%;" class="close" href="{{ path('star', {'id': offer.id}) }}"><i class="fa fa-star-o"></i></a>
+                {% endif %}
+
+                <a style="font-weight: bold; font-size: 110%;" class="close" href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}">×</a>
+            </span>
         </div>
 
         <p>

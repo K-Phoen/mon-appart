@@ -93,6 +93,11 @@ class Offer
      */
     private $viewed = false;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $starred = false;
+
     public static function fromArray(array $data)
     {
         $offer = new static();
@@ -504,5 +509,28 @@ class Offer
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set starred
+     *
+     * @param boolean $starred
+     * @return Offer
+     */
+    public function setStarred($starred)
+    {
+        $this->starred = $starred;
+
+        return $this;
+    }
+
+    /**
+     * Get starred
+     *
+     * @return boolean
+     */
+    public function getStarred()
+    {
+        return $this->starred;
     }
 }

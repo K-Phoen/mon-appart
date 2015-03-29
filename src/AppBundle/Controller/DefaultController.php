@@ -12,6 +12,7 @@ class DefaultController extends Controller
         $offers = $this->get('repository.offer')->findBy([
             'viewed' => false,
         ], [
+            'starred'   => 'DESC',
             'createdAt' => 'DESC',
         ]);
 
@@ -24,6 +25,18 @@ class DefaultController extends Controller
     {
         $offer = $this->get('repository.offer')->find($request->query->get('id'));
         $offer->setViewed(true);
+
+        $em = $this->get('doctrine.orm.default_entity_manager');
+        $em->persist($offer);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    public function starAction(Request $request)
+    {
+        $offer = $this->get('repository.offer')->find($request->query->get('id'));
+        $offer->setStarred(!$request->attributes->get('_unstar', false));
 
         $em = $this->get('doctrine.orm.default_entity_manager');
         $em->persist($offer);
