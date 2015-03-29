@@ -22,7 +22,9 @@
 
             <span class="label secondary">{{ offer.origin|capitalize }}</span>
             {% if offer.includesFurnitures %}<span class="label info">Meublé</span>{% endif %}
-            {% if offer.includingCharges %}<span class="label success">Charge incluses</span>{% else %}<span class="label alert">Hors charges</span>{% endif %}
+            {% if not offer.includingCharges is null %}
+                {% if offer.includingCharges %}<span class="label success">Charge incluses</span>{% else %}<span class="label alert">Hors charges</span>{% endif %}
+            {% endif %}
         </p>
     </div>
 </div>

@@ -61,7 +61,7 @@ class Leboncoin
         $crawler = new Crawler($html);
         $data    = [
             'id'     => $link,
-            'origin' => 'leboncoin',
+            'origin' => 'leboncoin.fr',
         ];
 
         // title

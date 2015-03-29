@@ -59,12 +59,12 @@ class Offer
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $thumb;
+    private $thumb = '';
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="array")
      */
-    private $pictures;
+    private $pictures = [];
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -72,9 +72,9 @@ class Offer
     private $including_charges;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $includes_furnitures;
+    private $includes_furnitures = false;
 
     /**
      * @ORM\Column(type="boolean")
