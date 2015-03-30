@@ -1,0 +1,6 @@
+criteria:
+    area_min: 'Surface minimale : %value% m²'
+    price_max: 'Prix max : %value% €'
+    rooms_min: 'Au moins %value% pièces'
+    type: 'Appartement'
+    locations: 'Situé à %value%'

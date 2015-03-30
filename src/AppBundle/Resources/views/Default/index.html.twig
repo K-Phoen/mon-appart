@@ -1,6 +1,18 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
+<h3>Recherche</h3>
+
+<div class="row" style="margin-bottom: 10px;">
+    <div class="large-12 columns">
+        <ul class="inline-list">
+            {% for name, value in search_criteria %}
+            <li>{{ ('criteria.'~name)|trans({'%value%': value|join(', ')}, 'AppBundle') }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
 <h3>{{ offers|length }} annonces</h3>
 
 {% for offer in offers %}

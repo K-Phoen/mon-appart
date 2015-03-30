@@ -19,7 +19,8 @@ class DefaultController extends Controller
         ]);
 
         return $this->render('AppBundle:Default:index.html.twig', [
-            'offers' => $offers,
+            'search_criteria' => $this->container->getParameter('app.search.criteria'),
+            'offers'          => $offers,
         ]);
     }
 
