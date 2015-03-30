@@ -98,6 +98,11 @@ class Offer
      */
     private $starred = false;
 
+    /**
+     * @ORM\Column(type="text", options={"default" = ""})
+     */
+    private $comment = '';
+
     public static function fromArray(array $data)
     {
         $offer = new static();
@@ -532,5 +537,28 @@ class Offer
     public function getStarred()
     {
         return $this->starred;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Offer
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

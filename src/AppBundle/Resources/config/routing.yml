@@ -13,3 +13,8 @@ unstar:
 flag_offer_as_viewed:
     path:         /flag-as-viewed
     defaults:     { _controller: AppBundle:Default:flagAsView }
+
+comment:
+    path:         /comment
+    defaults:     { _controller: AppBundle:Default:comment }
+    requirements: { _method: POST }

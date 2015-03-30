@@ -13,6 +13,15 @@
       {% endstylesheets %}
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     {% endblock %}
+
+    {% block javascripts %}
+      {% javascripts
+        '@AppBundle/Resources/public/js/vendor/jquery.js'
+        '@AppBundle/Resources/public/js/vendor/foundation.min.js'
+      %}
+      <script src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+    {% endblock %}
 </head>
 <body>
 <div class="row">
@@ -27,17 +36,8 @@
     </div>
 </div>
 
-{% block javascripts %}
-  {% javascripts
-    '@AppBundle/Resources/public/js/vendor/jquery.js'
-    '@AppBundle/Resources/public/js/vendor/foundation.min.js'
-  %}
-  <link rel="stylesheet" href="" />
-  <script src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-  <script>
+<script>
     $(document).foundation();
-  </script>
-{% endblock %}
+</script>
 </body>
 </html>
