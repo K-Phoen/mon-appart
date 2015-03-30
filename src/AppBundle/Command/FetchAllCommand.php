@@ -22,19 +22,25 @@ class FetchAllCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $criteria = $this->getSearchCriteria();
+        $criteria  = $this->getSearchCriteria();
+        $newOffers = [];
 
         foreach ($this->getCrawlers() as $crawler) {
             $output->writeln(sprintf('Using crawler <info>%s</info>', get_class($crawler)));
 
-            $this->crawl($crawler, $criteria, $output);
+            $newOffers = array_merge($newOffers, $this->crawl($crawler, $criteria, $output));
         }
+
+        $this->dispatch('offers.fetched', new GenericEvent($newOffers));
+
+        $output->writeln('Done.');
     }
 
     private function crawl(Crawler\OfferCrawler $crawler, $criteria, OutputInterface $output)
     {
         $em      = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         $results = $crawler->fetchResultsLinks($criteria);
+
         $output->writeln(sprintf('Found <info>%d</info> results.', count($results)));
 
         $newOffers = array_filter(array_map(function($result) use ($em, $crawler, $output) {
@@ -54,9 +60,8 @@ class FetchAllCommand extends ContainerAwareCommand
         }, $results));
 
         $em->flush();
-        $this->dispatch('offers.fetched', new GenericEvent($newOffers));
 
-        $output->writeln('Done.');
+        return $newOffers;
     }
 
     private function getCrawlers()
@@ -81,12 +86,6 @@ class FetchAllCommand extends ContainerAwareCommand
 
     private function getSearchCriteria()
     {
-        return [
-            'area_min'  => 35,
-            'price_max' => 750,
-            'rooms_min' => 2,
-            'type'      => 'flat',
-            'locations' => ['Lyon 69002', 'Lyon 69003'],
-        ];
+        return $this->getContainer()->getParameter('app.search.criteria');
     }
 }

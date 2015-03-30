@@ -77,3 +77,11 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+
+app:
+    criteria:
+        area_min:  35
+        price_max: 750
+        rooms_min: 2
+        type:      flat
+        locations: [Lyon 69002, Lyon 69003]
