@@ -61,6 +61,10 @@ class Leboncoin implements OfferCrawler
 
         // params
         $crawler->filter('.lbcParams tr')->each(function($node) use (&$data) {
+            if (count($node->filter('th')) === 0) { // happens when the GSP coordinates are in the source
+                return;
+            }
+
             $header = trim($node->filter('th')->text());
 
             if (!empty($this->paramsMap[$header])) {
