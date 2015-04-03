@@ -16,6 +16,7 @@ class DefaultController extends Controller
         ], [
             'starred'   => 'DESC',
             'createdAt' => 'DESC',
+            'id'        => 'DESC',
         ]);
 
         return $this->render('AppBundle:Default:index.html.twig', [
