@@ -16,10 +16,10 @@
 <h3>{{ offers|length }} annonces</h3>
 
 {% for offer in offers %}
-<div class="row offer">
+<div class="row offer" data-offer-id="{{ offer.id }}">
     <div class="large-4 columns">
         {% if offer.pictures|length > 0 %}
-            <ul class="example-orbit" data-orbit  data-options="animation_speed:400;timer:false;">
+            <ul data-orbit data-options="animation_speed:400;timer:false;">
                 {% for picture in offer.pictures %}
                 <li><img src="{{ picture }}" /></li>
                 {% endfor %}
@@ -33,14 +33,12 @@
         <div class="clearfix">
             <h5 class="left"><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
             <span class="right action-links">
-                <a data-offer-id="{{ offer.id }}" class="comment" href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                {% if offer.starred %}
-                    <a href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-star"></i></a>
-                {% else %}
-                    <a href="{{ path('star', {'id': offer.id}) }}"><i class="fa fa-star-o"></i></a>
-                {% endif %}
+                <a class="comment"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="star-action">
+                    <i class="fa {% if offer.starred %}fa-star{% else %}fa-star-o{% endif %}"></i>
+                </a>
 
-                <a href="{{ path('flag_offer_as_viewed', {'id': offer.id}) }}"><i class="fa fa-times"></i></a>
+                <a class="view-action"><i class="fa fa-times"></i></a>
             </span>
         </div>
 

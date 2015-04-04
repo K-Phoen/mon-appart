@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Offer;
@@ -25,25 +24,9 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function flagAsViewAction($id)
+    public function commentAction(Request $request, $id)
     {
         $offer = $this->getOffer($id);
-        $offer->flagAsViewed();
-
-        return $this->saveOfferAndGoHome($offer);
-    }
-
-    public function starAction(Request $request, $id)
-    {
-        $offer = $this->getOffer($id);
-        $offer->setStarred(!$request->attributes->get('_unstar', false));
-
-        return $this->saveOfferAndGoHome($offer);
-    }
-
-    public function commentAction(Request $request)
-    {
-        $offer = $this->getOffer($request->request->get('offer'));
         $offer->setComment($request->request->get('comment', ''));
 
         return $this->saveOfferAndGoHome($offer);
@@ -56,16 +39,5 @@ class DefaultController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('home');
-    }
-
-    private function getOffer($id)
-    {
-        $offer = $this->get('repository.offer')->find($id);
-
-        if ($offer === null) {
-            throw $this->createNotFoundException('Offer not found.');
-        }
-
-        return $offer;
     }
 }
