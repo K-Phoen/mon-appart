@@ -66,10 +66,7 @@ class FetchAllCommand extends ContainerAwareCommand
 
     private function getCrawlers()
     {
-        return [
-            $this->getContainer()->get('crawler.avendre_alouer'),
-            $this->getContainer()->get('crawler.leboncoin'),
-        ];
+        return $this->getContainer()->get('crawler.registry')->getAll();
     }
 
     private function offerExists($url)

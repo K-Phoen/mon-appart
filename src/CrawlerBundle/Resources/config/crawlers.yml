@@ -1,11 +1,18 @@
 services:
+    crawler.registry:
+        class: Crawler\Registry
+
     crawler.avendre_alouer:
         class:      Crawler\AVendreALouer
         arguments:  [ @crawler.search_url_builder.avendre_alouer]
+        tags:
+            -  { name: crawler }
 
     crawler.leboncoin:
         class:      Crawler\Leboncoin
         arguments:  [ @crawler.search_url_builder.leboncoin ]
+        tags:
+            -  { name: crawler }
 
     crawler.search_url_builder.leboncoin:
         class:  Crawler\LeboncoinSearchUrlBuilder
