@@ -7,6 +7,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(uniqueConstraints={
+ *  @ORM\UniqueConstraint(name="url_idx", columns={"url"})
+ * })
  */
 class Offer
 {
@@ -22,6 +25,11 @@ class Offer
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $url;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -103,85 +111,102 @@ class Offer
      */
     private $comment = '';
 
-    public static function fromArray(array $data)
+    public static function createFromArray(array $data)
     {
         $offer = new static();
+        $offer->generateUuid();
 
-        if (!empty($data['id'])) {
-            $offer->setId($data['id']);
+        if (!empty($data['url'])) {
+            $offer->url = $data['url'];
         }
 
         if (!empty($data['origin'])) {
-            $offer->setOrigin($data['origin']);
+            $offer->origin = $data['origin'];
         }
 
         if (!empty($data['title'])) {
-            $offer->setTitle($data['title']);
+            $offer->title = $data['title'];
         }
 
         if (!empty($data['price'])) {
-            $offer->setPrice($data['price']);
+            $offer->price = $data['price'];
         }
 
         if (!empty($data['area'])) {
-            $offer->setArea($data['area']);
+            $offer->area = $data['area'];
         }
 
         if (!empty($data['rooms'])) {
-            $offer->setRooms($data['rooms']);
+            $offer->rooms = $data['rooms'];
         }
 
         if (!empty($data['thumb'])) {
-            $offer->setThumb($data['thumb']);
+            $offer->thumb = $data['thumb'];
         }
 
         if (!empty($data['pictures'])) {
-            $offer->setPictures($data['pictures']);
+            $offer->pictures = $data['pictures'];
         }
 
         if (!empty($data['city'])) {
-            $offer->setCity($data['city']);
+            $offer->city = $data['city'];
         }
 
         if (!empty($data['zip_code'])) {
-            $offer->setZipCode($data['zip_code']);
-        }
-
-        if (!empty($data['zip_code'])) {
-            $offer->setZipCode($data['zip_code']);
+            $offer->zip_code = $data['zip_code'];
         }
 
         if (!empty($data['description'])) {
-            $offer->setDescription($data['description']);
+            $offer->description = $data['description'];
         }
 
         if (array_key_exists('including_charges', $data)) {
-            $offer->setIncludingCharges($data['including_charges']);
+            $offer->including_charges = $data['including_charges'];
         }
 
         if (array_key_exists('includes_furnitures', $data)) {
-            $offer->setIncludesFurnitures($data['includes_furnitures']);
+            $offer->includes_furnitures = $data['includes_furnitures'];
         }
 
         return $offer;
     }
 
-    public function getUrl()
+    public function generateUuid()
     {
-        return $this->id;
+        $this->id = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+
+            // 48 bits for "node"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 
-    /**
-     * Set id
-     *
-     * @param string $id
-     * @return Offer
-     */
-    public function setId($id)
+    public function flagAsViewed()
     {
-        $this->id = $id;
+        $this->viewed = true;
+    }
 
-        return $this;
+    public function setStarred($starred)
+    {
+        $this->starred = $starred;
+    }
+
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
     }
 
     /**
@@ -195,16 +220,13 @@ class Offer
     }
 
     /**
-     * Set origin
+     * Get url
      *
-     * @param string $origin
-     * @return Offer
+     * @return string Url
      */
-    public function setOrigin($origin)
+    public function getUrl()
     {
-        $this->origin = $origin;
-
-        return $this;
+        return $this->url;
     }
 
     /**
@@ -218,19 +240,6 @@ class Offer
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Offer
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * Get title
      *
      * @return string
@@ -238,19 +247,6 @@ class Offer
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set price
-     *
-     * @param integer $price
-     * @return Offer
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
     }
 
     /**
@@ -264,19 +260,6 @@ class Offer
     }
 
     /**
-     * Set city
-     *
-     * @param string $city
-     * @return Offer
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
      * Get city
      *
      * @return string
@@ -284,19 +267,6 @@ class Offer
     public function getCity()
     {
         return $this->city;
-    }
-
-    /**
-     * Set zip_code
-     *
-     * @param string $zipCode
-     * @return Offer
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->zip_code = $zipCode;
-
-        return $this;
     }
 
     /**
@@ -310,19 +280,6 @@ class Offer
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     * @return Offer
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
      * Get type
      *
      * @return string
@@ -330,19 +287,6 @@ class Offer
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set rooms
-     *
-     * @param integer $rooms
-     * @return Offer
-     */
-    public function setRooms($rooms)
-    {
-        $this->rooms = $rooms;
-
-        return $this;
     }
 
     /**
@@ -356,19 +300,6 @@ class Offer
     }
 
     /**
-     * Set thumb
-     *
-     * @param string $thumb
-     * @return Offer
-     */
-    public function setThumb($thumb)
-    {
-        $this->thumb = $thumb;
-
-        return $this;
-    }
-
-    /**
      * Get thumb
      *
      * @return string
@@ -376,19 +307,6 @@ class Offer
     public function getThumb()
     {
         return $this->thumb;
-    }
-
-    /**
-     * Set pictures
-     *
-     * @param array $pictures
-     * @return Offer
-     */
-    public function setPictures($pictures)
-    {
-        $this->pictures = $pictures;
-
-        return $this;
     }
 
     /**
@@ -402,19 +320,6 @@ class Offer
     }
 
     /**
-     * Set including_charges
-     *
-     * @param boolean $includingCharges
-     * @return Offer
-     */
-    public function setIncludingCharges($includingCharges)
-    {
-        $this->including_charges = $includingCharges;
-
-        return $this;
-    }
-
-    /**
      * Get including_charges
      *
      * @return boolean
@@ -422,19 +327,6 @@ class Offer
     public function getIncludingCharges()
     {
         return $this->including_charges;
-    }
-
-    /**
-     * Set includes_furnitures
-     *
-     * @param boolean $includesFurnitures
-     * @return Offer
-     */
-    public function setIncludesFurnitures($includesFurnitures)
-    {
-        $this->includes_furnitures = $includesFurnitures;
-
-        return $this;
     }
 
     /**
@@ -448,19 +340,6 @@ class Offer
     }
 
     /**
-     * Set area
-     *
-     * @param integer $area
-     * @return Offer
-     */
-    public function setArea($area)
-    {
-        $this->area = $area;
-
-        return $this;
-    }
-
-    /**
      * Get area
      *
      * @return integer
@@ -468,19 +347,6 @@ class Offer
     public function getArea()
     {
         return $this->area;
-    }
-
-    /**
-     * Set viewed
-     *
-     * @param boolean $viewed
-     * @return Offer
-     */
-    public function setViewed($viewed)
-    {
-        $this->viewed = $viewed;
-
-        return $this;
     }
 
     /**
@@ -494,19 +360,6 @@ class Offer
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Offer
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
      * Get description
      *
      * @return string
@@ -517,19 +370,6 @@ class Offer
     }
 
     /**
-     * Set starred
-     *
-     * @param boolean $starred
-     * @return Offer
-     */
-    public function setStarred($starred)
-    {
-        $this->starred = $starred;
-
-        return $this;
-    }
-
-    /**
      * Get starred
      *
      * @return boolean
@@ -537,19 +377,6 @@ class Offer
     public function getStarred()
     {
         return $this->starred;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Offer
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
     }
 
     /**

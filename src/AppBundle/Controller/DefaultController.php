@@ -25,17 +25,17 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function flagAsViewAction(Request $request)
+    public function flagAsViewAction($id)
     {
-        $offer = $this->getOffer($request->query->get('id'));
-        $offer->setViewed(true);
+        $offer = $this->getOffer($id);
+        $offer->flagAsViewed();
 
         return $this->saveOfferAndGoHome($offer);
     }
 
-    public function starAction(Request $request)
+    public function starAction(Request $request, $id)
     {
-        $offer = $this->getOffer($request->query->get('id'));
+        $offer = $this->getOffer($id);
         $offer->setStarred(!$request->attributes->get('_unstar', false));
 
         return $this->saveOfferAndGoHome($offer);

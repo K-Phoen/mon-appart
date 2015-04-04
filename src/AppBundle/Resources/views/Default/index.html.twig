@@ -33,7 +33,7 @@
         <div class="clearfix">
             <h5 class="left"><a href="{{ offer.url }}">{{ offer.title }}</a></h5>
             <span class="right action-links">
-                <a data-offer-id="{{ offer.url }}" class="comment" href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                <a data-offer-id="{{ offer.id }}" class="comment" href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                 {% if offer.starred %}
                     <a href="{{ path('unstar', {'id': offer.id}) }}"><i class="fa fa-star"></i></a>
                 {% else %}

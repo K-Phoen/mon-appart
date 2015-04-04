@@ -3,15 +3,15 @@ home:
     defaults:     { _controller: AppBundle:Default:index }
 
 star:
-    path:         /star
+    path:         /{id}/star
     defaults:     { _controller: AppBundle:Default:star }
 
 unstar:
-    path:         /unstar
+    path:         /{id}/unstar
     defaults:     { _controller: AppBundle:Default:star, _unstar: true }
 
 flag_offer_as_viewed:
-    path:         /flag-as-viewed
+    path:         /{id}/flag-as-viewed
     defaults:     { _controller: AppBundle:Default:flagAsView }
 
 comment:

@@ -52,7 +52,7 @@ class FetchAllCommand extends ContainerAwareCommand
             $output->writeln(sprintf('Fetching URL <info>%s</info>', $result));
 
             $data  = $crawler->fetchLink($result);
-            $offer = Offer::fromArray($data);
+            $offer = Offer::createFromArray($data);
 
             $em->persist($offer);
 
