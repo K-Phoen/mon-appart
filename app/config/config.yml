@@ -67,7 +67,7 @@ swiftmailer:
 app:
     criteria:
         area_min:  35
-        price_max: 750
+        price_max: 700
         rooms_min: 2
         type:      flat
         locations: [Lyon 69002, Lyon 69003]
