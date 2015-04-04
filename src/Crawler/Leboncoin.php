@@ -49,7 +49,7 @@ class Leboncoin implements OfferCrawler
         $html    = $this->fetchUrlContent($link);
         $crawler = new Crawler($html);
         $data    = [
-            'id'     => $link,
+            'url'    => $link,
             'origin' => 'leboncoin.fr',
         ];
 

@@ -76,7 +76,7 @@ class FetchAllCommand extends ContainerAwareCommand
     {
         $repo = $this->getContainer()->get('repository.offer');
 
-        return $repo->find($url) !== null;
+        return $repo->findOneByUrl($url) !== null;
     }
 
     private function dispatch($eventName, $event)

@@ -40,13 +40,21 @@ class OffersFetchedListener implements EventSubscriberInterface
 
     private function getMessage(array $offers)
     {
+        $offersList = implode(PHP_EOL, array_map(function($offer) {
+            return sprintf('<li>%s</li>', $offer->getTitle());
+        }, $offers));
+
         return Swift_Message::newInstance()
             ->setSubject(sprintf('[APPART] %s nouvelles annonces ont été trouvées', count($offers)))
             ->setFrom('contact+appart@kevingomez.fr')
             ->setTo('contact@kevingomez.fr')
             ->setBody(<<<MSG
+<ul>
+    $offersList
+</ul>
 Bah, cf le titre.
 MSG
+, 'text/html'
             );
     }
 }
