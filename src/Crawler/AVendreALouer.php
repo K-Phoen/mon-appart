@@ -6,14 +6,21 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class AVendreALouer implements OfferCrawler
 {
+    private $searchUrlBuilder;
+
     private $criteriaMap = [
         'locations'  => 'buildLocationCriteria',
         'type'       => 'buildTypeCriteria',
     ];
 
+    public function __construct(AVendreALouerSearchUrlBuilder $searchUrlBuilder)
+    {
+        $this->searchUrlBuilder = $searchUrlBuilder;
+    }
+
     public function fetchResultsLinks(array $criteria)
     {
-        $searchUrl = $this->buildSearchUrl($criteria);
+        $searchUrl = $this->searchUrlBuilder->buildUrl($criteria);
         $crawler   = new Crawler($this->fetchUrlContent($searchUrl));
 
         $links = $crawler->filter('#result-list li .details a.linkCtnr');
