@@ -18,3 +18,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # the alerts will be sent to this address
+    alerts_destination_address: foo@bar.com
+    # and the following one will be used as sender
+    alerts_origin_address: 'foo@bar.com'

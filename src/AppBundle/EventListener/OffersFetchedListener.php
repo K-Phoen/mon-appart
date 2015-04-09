@@ -12,10 +12,14 @@ use Bundle\AppBundle\Entity\Offer;
 class OffersFetchedListener implements EventSubscriberInterface
 {
     private $mailer;
+    private $destinationAddress;
+    private $originAddress;
 
-    public function __construct(Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $mailer, $destinationAddress, $originAddress)
     {
-        $this->mailer = $mailer;
+        $this->mailer             = $mailer;
+        $this->destinationAddress = $destinationAddress;
+        $this->originAddress      = $originAddress;
     }
 
     public static function getSubscribedEvents()
@@ -46,8 +50,8 @@ class OffersFetchedListener implements EventSubscriberInterface
 
         return Swift_Message::newInstance()
             ->setSubject(sprintf('[APPART] %s nouvelles annonces ont été trouvées', count($offers)))
-            ->setFrom('contact+appart@kevingomez.fr')
-            ->setTo('contact@kevingomez.fr')
+            ->setFrom($this->originAddress)
+            ->setTo($this->destinationAddress)
             ->setBody(<<<MSG
 <ul>
     $offersList
