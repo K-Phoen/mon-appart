@@ -8,7 +8,7 @@ critères et qui va chercher pour nous (uniquement sur
 [Leboncoin.fr](http://leboncoin.fr/) et [avendrealouer.fr](http://avendrealouer.fr/)
 pour le moment).
 
-**Important :** ce projet a été réalisé dans le cadre de **ma** recherche
+**Important :** ce projet a été réalisé **rapidement** et dans le cadre de **ma** recherche
 d'appartement et à ce titres certains aspect du code (notamment concernant les
 crawlers) sont spécifiques à ma ville de recherche (Lyon). Rendre le code
 générique reste cependant largement réalisable.
