@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Crawler\Website;
+namespace App\Crawler;
 
 use App\Crawler\Crawler;
+use App\Entity\Offer;
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 
@@ -31,18 +32,17 @@ class Leboncoin implements Crawler
         $payload = json_decode($content, true);
 
         foreach ($payload['ads'] as $offer) {
-            yield $this->offerToArray($offer);
+            yield Offer::createFromArray($this->offerToArray($offer));
         }
     }
 
     private function offerToArray(array $offer): array
     {
         return [
-            'origin' => 'leboncoin.fr',
             'title' => $offer['subject'],
             'description' => $offer['body'],
-            'url' => $offer['images']['thumb_url'] ?? '',
-            'thumb_url' => $offer['url'],
+            'url' => $offer['url'],
+            'thumb_url' => $offer['images']['thumb_url'] ?? '',
             'price' => $offer['price'][0],
             'location' => [
                 'latitude' => $offer['location']['lat'],

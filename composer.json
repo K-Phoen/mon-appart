@@ -6,10 +6,12 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "php-http/httplug-pack": "^1.1",
+        "ramsey/uuid": "^3.8",
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.1",
         "symfony/lts": "^4@dev",
+        "symfony/orm-pack": "^1.0",
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
