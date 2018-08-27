@@ -51,15 +51,14 @@
                 </div>
                 {% endif %}
 
-                {% if not offer.ignored %}
-                <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal" data-offer-id="{{ offer.id }}" data-comment-uri="{{ path('comment_offer', {'id': offer.id}) }}">Commenter</button>
-                    <a href="#" class="btn btn-primary">Some other action</a>
-                </div>
-                {% endif %}
+
 
                 <div class="card-footer text-muted">
                     {{ offer.createdAt|date("d/m/Y à H:i", "Europe/Paris") }}
+
+                    {% if not offer.ignored %}
+                        <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#commentModal" data-offer-id="{{ offer.id }}" data-comment-uri="{{ path('comment_offer', {'id': offer.id}) }}">Commenter</button>
+                    {% endif %}
                 </div>
             </div>
         </div>
