@@ -10,7 +10,7 @@
                     <a href="{{ offer.url }}">{{ offer.title }}</a>
 
                     <form action="{{ path('ignore_offer', {'id': offer.id}) }}" method="POST" class="d-inline">
-                        <button type="submit" class="close" aria-label="Ignorer">
+                        <button type="submit" class="close" aria-label="Ignorer" title="Ignorer">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </form>
