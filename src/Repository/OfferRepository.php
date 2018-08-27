@@ -7,6 +7,8 @@ namespace App\Repository;
 use App\Entity\Offer;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RulerZ\RulerZ;
+use RulerZ\Spec\Specification;
 
 class OfferRepository
 {
@@ -16,20 +18,24 @@ class OfferRepository
     /** @var ObjectRepository */
     private $repo;
 
-    public function __construct(EntityManagerInterface $em)
+    /** @var RulerZ */
+    private $rulerz;
+
+    public function __construct(EntityManagerInterface $em, RulerZ $rulerz)
     {
         $this->em = $em;
         $this->repo = $em->getRepository(Offer::class);
+        $this->rulerz = $rulerz;
     }
 
     /**
      * @return Offer[]
      */
-    public function findAll(): iterable
+    public function matching(Specification $specification): iterable
     {
-        return $this->repo->findBy([
-            'ignored' => false,
-        ]);
+        $queryBuilder = $this->em->createQueryBuilder()->select('o')->from(Offer::class, 'o');
+
+        return $this->rulerz->filterSpec($queryBuilder,$specification);
     }
 
     public function find(string $id): ?Offer

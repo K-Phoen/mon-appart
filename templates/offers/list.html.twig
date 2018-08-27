@@ -6,14 +6,20 @@
         <div class="col-12 col-lg-6 offset-lg-3">
             <div class="card bg-light border-light" style="margin-bottom: 1rem">
                 <h5 class="card-header">
+                    {% if offer.ignored %}
+                        <span class="badge badge-danger">Ignorée</span>
+                    {% endif %}
+
                     <span class="badge badge-primary">Leboncoin</span>
                     <a href="{{ offer.url }}">{{ offer.title }}</a>
 
+                    {% if not offer.ignored %}
                     <form action="{{ path('ignore_offer', {'id': offer.id}) }}" method="POST" class="d-inline">
                         <button type="submit" class="close" aria-label="Ignorer" title="Ignorer">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </form>
+                    {% endif %}
                 </h5>
 
                 <div class="card-body">
@@ -39,10 +45,12 @@
                     {% endif %}
                 </div>
 
+                {% if not offer.ignored %}
                 <div class="card-body">
                     <a href="#" class="btn btn-primary">Comment</a>
                     <a href="#" class="btn btn-primary">Some other action</a>
                 </div>
+                {% endif %}
 
                 <div class="card-footer text-muted">
                     {{ offer.createdAt|date("d/m/Y à H:i", "Europe/Paris") }}

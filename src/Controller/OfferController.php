@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\OfferRepository;
+use App\Spec;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +25,17 @@ class OfferController extends AbstractController
     public function listOffers()
     {
         return $this->render('offers/list.html.twig', [
-            'offers' => $this->offerRepository->findAll(),
+            'offers' => $this->offerRepository->matching(new Spec\ToReview()),
+        ]);
+    }
+
+    /**
+     * @Route("/ignored", name="list_ignored_offers")
+     */
+    public function listIgnoredOffers()
+    {
+        return $this->render('offers/list.html.twig', [
+            'offers' => $this->offerRepository->matching((new Spec\ToReview())->not()),
         ]);
     }
 

@@ -28,3 +28,5 @@ services:
         tags: ['controller.service_arguments']
 
     App\Crawler\Crawler: '@App\Crawler\Leboncoin'
+
+    RulerZ\RulerZ: '@rulerz'

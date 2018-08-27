@@ -1,0 +1,7 @@
+kphoen_rulerz:
+    cache: "%kernel.cache_dir%/rulerz"
+    debug: "%kernel.debug%"
+
+    targets:
+        native: true
+        doctrine: true

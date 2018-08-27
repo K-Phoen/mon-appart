@@ -165,6 +165,11 @@ class Offer
         return $this->area;
     }
 
+    public function isIgnored(): bool
+    {
+        return $this->ignored;
+    }
+
     public function ignore(): void
     {
         $this->ignored = true;
