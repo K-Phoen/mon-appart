@@ -1,0 +1,27 @@
+FROM php:7.2-apache
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install -j$(nproc) pdo_pgsql opcache pgsql
+
+RUN apt-get update && apt-get install -y --no-install-recommends zlib1g-dev libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install -j$(nproc) intl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install APCu and APC backward compatibility
+RUN pecl install apcu \
+    && pecl install apcu_bc-1.0.3 \
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
+    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
+
+RUN a2enmod rewrite
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
