@@ -17,6 +17,22 @@
             </div>
 
             <div class="card-body">
+                <span class="badge badge-info">{{ offer.price }} €</span>
+                <span class="badge badge-info">{{ offer.area }} m²</span>
+                <span class="badge badge-info">{{ offer.rooms }} pièces</span>
+
+                {% if offer.furnished %}
+                    <span class="badge badge-success">Meublé</span>
+                {% endif %}
+
+                {% if offer.includingCharges %}
+                    <span class="badge badge-secondary">Charges comprises</span>
+                {% else %}
+                    <span class="badge badge-warning">Charges NON comprises</span>
+                {% endif %}
+            </div>
+
+            <div class="card-body">
                 <a href="#" class="btn btn-primary">Comment</a>
                 <a href="#" class="btn btn-primary">Some other action</a>
             </div>
