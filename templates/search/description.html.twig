@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <div class="card bg-light border-light" style="margin-bottom: 1rem">
+                <h5 class="card-header">Critères de recherche</h5>
+
+                <ul class="list-group list-group-flush">
+                    {% for item in criteria %}
+                    <li class="list-group-item">{{ ('criteria.'~item.type.key)|lower|trans({'%value%': item.value}) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

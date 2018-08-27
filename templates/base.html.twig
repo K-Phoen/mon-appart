@@ -8,7 +8,19 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 1rem">
-        <a class="navbar-brand" href="/">Mon Appart</a>
+        <a class="navbar-brand" href="{{ path('list_offers') }}">Mon Appart</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('show_search') }}">Critères</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="container-fluid">
