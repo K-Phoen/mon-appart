@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="card-footer text-muted">
-                    {{ offer.createdAt|date }}
+                    {{ offer.createdAt|date("d/m/Y à H:i", "Europe/Paris") }}
                 </div>
             </div>
         </div>
