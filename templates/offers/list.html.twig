@@ -1,44 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="card-columns">
+    <div class="row">
         {% for offer in offers %}
-        <div class="card bg-light border-light">
-            <h5 class="card-header">
-                <span class="badge badge-primary">Leboncoin</span>
-                <a href="{{ offer.url }}">{{ offer.title }}</a>
-            </h5>
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <div class="card bg-light border-light" style="margin-bottom: 1rem">
+                <h5 class="card-header">
+                    <span class="badge badge-primary">Leboncoin</span>
+                    <a href="{{ offer.url }}">{{ offer.title }}</a>
+                </h5>
 
-            <div class="card-body">
-                <p class="card-text">
-                    <img class="float-left img-thumbnail" style="max-height: 12rem; margin-right: 1rem" src="{{ offer.thumb|default("https://dummyimage.com/180x110/fff/aaa&text=N/A") }}">
-                    {{ offer.description }}
-                </p>
-            </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <img class="float-left img-thumbnail" style="max-height: 12rem; margin-right: 1rem" src="{{ offer.thumb|default("https://dummyimage.com/180x110/fff/aaa&text=N/A") }}">
+                        {{ offer.description }}
+                    </p>
+                </div>
 
-            <div class="card-body">
-                <span class="badge badge-info">{{ offer.price }} €</span>
-                <span class="badge badge-info">{{ offer.area }} m²</span>
-                <span class="badge badge-info">{{ offer.rooms }} pièces</span>
+                <div class="card-body">
+                    <span class="badge badge-info">{{ offer.price }} €</span>
+                    <span class="badge badge-info">{{ offer.area }} m²</span>
+                    <span class="badge badge-info">{{ offer.rooms }} pièces</span>
 
-                {% if offer.furnished %}
-                    <span class="badge badge-success">Meublé</span>
-                {% endif %}
+                    {% if offer.furnished %}
+                        <span class="badge badge-success">Meublé</span>
+                    {% endif %}
 
-                {% if offer.includingCharges %}
-                    <span class="badge badge-secondary">Charges comprises</span>
-                {% else %}
-                    <span class="badge badge-warning">Charges NON comprises</span>
-                {% endif %}
-            </div>
+                    {% if offer.includingCharges %}
+                        <span class="badge badge-secondary">Charges comprises</span>
+                    {% else %}
+                        <span class="badge badge-warning">Charges NON comprises</span>
+                    {% endif %}
+                </div>
 
-            <div class="card-body">
-                <a href="#" class="btn btn-primary">Comment</a>
-                <a href="#" class="btn btn-primary">Some other action</a>
-            </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Comment</a>
+                    <a href="#" class="btn btn-primary">Some other action</a>
+                </div>
 
-            <div class="card-footer text-muted">
-                {{ offer.createdAt|date }}
+                <div class="card-footer text-muted">
+                    {{ offer.createdAt|date }}
+                </div>
             </div>
         </div>
         {% endfor %}
