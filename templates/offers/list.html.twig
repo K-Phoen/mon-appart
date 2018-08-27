@@ -1,1 +1,30 @@
 {% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card-columns">
+        {% for offer in offers %}
+        <div class="card bg-light border-secondary">
+            <h5 class="card-header">
+                <span class="badge badge-primary">Leboncoin</span>
+                <a href="{{ offer.url }}">{{ offer.title }}</a>
+            </h5>
+
+            <div class="card-body">
+                <p class="card-text">
+                    <img class="float-left" style="max-height: 12rem; padding-right: 1rem" src="{{ offer.thumb }}">
+                    {{ offer.description }}
+                </p>
+            </div>
+
+            <div class="card-body">
+                <a href="#" class="btn btn-primary">Comment</a>
+                <a href="#" class="btn btn-primary">Some other action</a>
+            </div>
+
+            <div class="card-footer text-muted">
+                {{ offer.createdAt|date }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -96,7 +96,7 @@ class Offer
         $offer->price = (int) $data['price'];
         $offer->area = (int) $data['area'];
         $offer->rooms = (int) $data['rooms'];
-        $offer->thumb = $data['thumb_url'];
+        $offer->thumbUrl = $data['thumb_url'];
         $offer->description = $data['description'];
         $offer->includingCharges = (bool) $data['is_charges_included'];
         $offer->isFurnished = (bool) $data['is_furnished'];
@@ -115,7 +115,7 @@ class Offer
         $this->viewed = true;
     }
 
-    public function id(): int
+    public function id(): string
     {
         return $this->id;
     }
@@ -142,7 +142,7 @@ class Offer
 
     public function thumb(): string
     {
-        return $this->thumb;
+        return $this->thumbUrl;
     }
 
     public function pictures(): array
@@ -178,5 +178,10 @@ class Offer
     public function isStarred(): bool
     {
         return $this->starred;
+    }
+
+    public function createdAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
     }
 }
