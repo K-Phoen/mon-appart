@@ -27,4 +27,22 @@ class OfferController extends AbstractController
             'offers' => $this->offerRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/ignore", name="ignore_offer", methods={"POST"})
+     */
+    public function ignoreOffer(string $id)
+    {
+        $offer = $this->offerRepository->find($id);
+        if (!$offer) {
+            throw $this->createNotFoundException('Offer not found.');
+        }
+
+        $offer->ignore();
+        $this->offerRepository->persist($offer);
+
+        $this->addFlash('success', 'Offre ignorée.');
+
+        return $this->redirectToRoute('list_offers');
+    }
 }

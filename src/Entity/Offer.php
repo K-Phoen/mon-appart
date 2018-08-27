@@ -75,7 +75,7 @@ class Offer
     /**
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $viewed = false;
+    private $ignored = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default" = 0})
@@ -165,9 +165,9 @@ class Offer
         return $this->area;
     }
 
-    public function isViewed(): bool
+    public function ignore(): void
     {
-        return $this->viewed;
+        $this->ignored = true;
     }
 
     public function description(): string
