@@ -5,7 +5,7 @@
         {% for offer in offers %}
         <div class="col-12 col-lg-6 offset-lg-3">
             <div id="offer-{{ offer.id }}" class="card bg-light border-light" style="margin-bottom: 1rem">
-                <h5 class="card-header text-truncate">
+                <h5 class="card-header">
                     {% if offer.ignored %}
                         <span class="badge badge-danger">Ignorée</span>
                     {% endif %}
