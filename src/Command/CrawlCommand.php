@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Crawler\PersistOffers;
+use App\Entity\Offer;
+use App\Search\Request as Search;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,12 +32,11 @@ class CrawlCommand extends Command
     {
         $output->writeln('Crawling…');
 
-        $criteria = [];
-
         $table = new Table($output);
         $table->setHeaders(['Title', 'Price', 'Area', 'Url']);
 
-        foreach ($this->crawler->resultsFor($criteria) as $result) {
+        /** @var Offer $result */
+        foreach ($this->crawler->resultsFor(Search::criteria()) as $result) {
             $table->addRow([
                 $result->title(),
                 $result->price().' €',

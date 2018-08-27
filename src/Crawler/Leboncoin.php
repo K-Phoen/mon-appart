@@ -6,6 +6,7 @@ namespace App\Crawler;
 
 use App\Crawler\Crawler;
 use App\Entity\Offer;
+use App\Search\Criteria;
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 
@@ -13,20 +14,31 @@ class Leboncoin implements Crawler
 {
     private $httpClient;
     private $httpRequestFactory;
+    private $criteriaConverter;
 
-    public function __construct(HttpClient $httpClient, RequestFactory $httpRequestFactory)
+    public function __construct(HttpClient $httpClient, RequestFactory $httpRequestFactory, LeboncoinCriteriaConverter $criteriaConverter)
     {
         $this->httpClient = $httpClient;
         $this->httpRequestFactory = $httpRequestFactory;
+        $this->criteriaConverter = $criteriaConverter;
     }
 
+    /**
+     * @param Criteria[] $criteria
+     *
+     * @return Offer[]
+     */
     public function resultsFor(array $criteria): iterable
     {
         $request = $this->httpRequestFactory->createRequest('POST', 'https://api.leboncoin.fr/finder/search')
             ->withAddedHeader('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0')
             ->withAddedHeader('api_key', 'ba0c2dad52b3ec')
-            ->withBody(\guzzlehttp\psr7\stream_for('{"limit":35,"limit_alu":3,"filters":{"category":{"id":"10"},"enums":{"real_estate_type":["2"],"ad_type":["offer"]},"location":{"city_zipcodes":[{"city":"Lyon","label":"Lyon (69003)","zipcode":"69003"},{"city":"Lyon","label":"Lyon (69007)","zipcode":"69007"}],"regions":["22"]},"keywords":{},"ranges":{"rooms":{"min":3},"square":{"min":50}}}}'));
+            ->withBody(\guzzlehttp\psr7\stream_for(json_encode($this->buildSearch($criteria))));
         $response = $this->httpClient->sendRequest($request);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException('Search failed');
+        }
 
         $content = $response->getBody()->getContents();
         $payload = json_decode($content, true);
@@ -34,6 +46,43 @@ class Leboncoin implements Crawler
         foreach ($payload['ads'] as $offer) {
             yield Offer::createFromArray($this->offerToArray($offer));
         }
+    }
+
+    private function buildSearch(array $criteria): array
+    {
+        $search = [
+            'limit' => 35,
+            'limit_alu' => 3,
+            'filters' => [
+                'category' => ['id' => '10'],
+                'enums' => [
+                    'real_estate_type' => ['2'], // flat
+                    'ad_type' => ['offer'],
+                ],
+                'location' => [
+                    'city_zipcodes' => [
+                        [
+                            'city' => 'Lyon',
+                            'label' => 'Lyon (69003)',
+                            'zipcode' => '69003',
+                        ],
+                        [
+                            'city' => 'Lyon',
+                            'label' => 'Lyon (69007)',
+                            'zipcode' => '69007',
+                        ],
+                    ],
+                    'regions' => ['22'],
+                ],
+                'ranges' => [], // to be filled by the criteria
+            ],
+        ];
+
+        foreach ($criteria as $rawCriteria) {
+            $search['filters']['ranges'] += $this->criteriaConverter->criteriaToArray($rawCriteria);
+        }
+
+        return $search;
     }
 
     private function offerToArray(array $offer): array
