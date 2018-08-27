@@ -3,7 +3,7 @@
 {% block body %}
     <div class="card-columns">
         {% for offer in offers %}
-        <div class="card bg-light border-secondary">
+        <div class="card bg-light border-light">
             <h5 class="card-header">
                 <span class="badge badge-primary">Leboncoin</span>
                 <a href="{{ offer.url }}">{{ offer.title }}</a>
@@ -11,7 +11,7 @@
 
             <div class="card-body">
                 <p class="card-text">
-                    <img class="float-left" style="max-height: 12rem; padding-right: 1rem" src="{{ offer.thumb }}">
+                    <img class="float-left img-thumbnail" style="max-height: 12rem; margin-right: 1rem" src="{{ offer.thumb|default("https://dummyimage.com/180x110/fff/aaa&text=N/A") }}">
                     {{ offer.description }}
                 </p>
             </div>
