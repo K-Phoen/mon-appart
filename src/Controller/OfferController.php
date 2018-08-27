@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Repository\OfferRepository;
 use App\Spec;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OfferController extends AbstractController
@@ -53,6 +54,24 @@ class OfferController extends AbstractController
         $this->offerRepository->persist($offer);
 
         $this->addFlash('success', 'Offre ignorée.');
+
+        return $this->redirectToRoute('list_offers');
+    }
+
+    /**
+     * @Route("/{id}/comment", name="comment_offer", methods={"POST"})
+     */
+    public function commentOffer(Request $request, string $id)
+    {
+        $offer = $this->offerRepository->find($id);
+        if (!$offer) {
+            throw $this->createNotFoundException('Offer not found.');
+        }
+
+        $offer->updateComment($request->request->get('comment', ''));
+        $this->offerRepository->persist($offer);
+
+        $this->addFlash('success', 'Commentaire enregistré.');
 
         return $this->redirectToRoute('list_offers');
     }

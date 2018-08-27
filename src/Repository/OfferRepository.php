@@ -33,7 +33,11 @@ class OfferRepository
      */
     public function matching(Specification $specification): iterable
     {
-        $queryBuilder = $this->em->createQueryBuilder()->select('o')->from(Offer::class, 'o');
+        $queryBuilder = $this->em->createQueryBuilder()
+            ->select('o')
+            ->from(Offer::class, 'o')
+            ->orderBy('o.createdAt', 'DESC')
+            ->orderBy('o.id', 'DESC');
 
         return $this->rulerz->filterSpec($queryBuilder,$specification);
     }

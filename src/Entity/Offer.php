@@ -58,6 +58,11 @@ class Offer
     private $description = '';
 
     /**
+     * @ORM\Column(type="text", options={"default": ""})
+     */
+    private $comment = '';
+
+    /**
      * @ORM\Column(type="array")
      */
     private $pictures = [];
@@ -76,11 +81,6 @@ class Offer
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     private $ignored = false;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
-    private $starred = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -108,11 +108,6 @@ class Offer
     {
         $this->id = Uuid::uuid4()->toString();
         $this->createdAt = new \DateTimeImmutable();
-    }
-
-    public function flagAsViewed(): void
-    {
-        $this->viewed = true;
     }
 
     public function id(): string
@@ -180,9 +175,14 @@ class Offer
         return $this->description;
     }
 
-    public function isStarred(): bool
+    public function comment(): string
     {
-        return $this->starred;
+        return $this->comment;
+    }
+
+    public function updateComment(string $comment): void
+    {
+        $this->comment = $comment;
     }
 
     public function createdAt(): \DateTimeInterface
