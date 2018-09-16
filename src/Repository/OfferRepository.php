@@ -36,9 +36,9 @@ class OfferRepository
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('o')
             ->from(Offer::class, 'o')
-            ->orderBy('o.createdAt', 'DESC')
-            ->orderBy('o.starred', 'DESC')
-            ->orderBy('o.id', 'DESC');
+            ->addOrderBy('o.starred', 'DESC')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->addOrderBy('o.id', 'DESC');
 
         return $this->rulerz->filterSpec($queryBuilder,$specification);
     }
