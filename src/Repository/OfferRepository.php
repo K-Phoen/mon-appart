@@ -37,6 +37,7 @@ class OfferRepository
             ->select('o')
             ->from(Offer::class, 'o')
             ->orderBy('o.createdAt', 'DESC')
+            ->orderBy('o.starred', 'DESC')
             ->orderBy('o.id', 'DESC');
 
         return $this->rulerz->filterSpec($queryBuilder,$specification);

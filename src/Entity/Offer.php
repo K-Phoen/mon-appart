@@ -83,6 +83,11 @@ class Offer
     private $ignored = false;
 
     /**
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $starred = false;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -168,6 +173,21 @@ class Offer
     public function ignore(): void
     {
         $this->ignored = true;
+    }
+
+    public function isStarred(): bool
+    {
+        return $this->starred;
+    }
+
+    public function star(): void
+    {
+        $this->starred = true;
+    }
+
+    public function unStar(): void
+    {
+        $this->starred = false;
     }
 
     public function description(): string

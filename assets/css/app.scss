@@ -1,5 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 body {
     background-color: lightgray;
+}
+
+.star {
+    cursor: pointer;
 }

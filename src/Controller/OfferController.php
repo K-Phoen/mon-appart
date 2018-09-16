@@ -8,6 +8,7 @@ use App\Repository\OfferRepository;
 use App\Spec;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OfferController extends AbstractController
@@ -56,6 +57,38 @@ class OfferController extends AbstractController
         $this->addFlash('success', 'Offre ignorée.');
 
         return $this->redirectToRoute('list_offers');
+    }
+
+    /**
+     * @Route("/{id}/star", name="star_offer", methods={"POST"})
+     */
+    public function starOffer(string $id)
+    {
+        $offer = $this->offerRepository->find($id);
+        if (!$offer) {
+            throw $this->createNotFoundException('Offer not found.');
+        }
+
+        $offer->star();
+        $this->offerRepository->persist($offer);
+
+        return new Response('', Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("/{id}/unstar", name="unstar_offer", methods={"POST"})
+     */
+    public function unstarOffer(string $id)
+    {
+        $offer = $this->offerRepository->find($id);
+        if (!$offer) {
+            throw $this->createNotFoundException('Offer not found.');
+        }
+
+        $offer->unStar();
+        $this->offerRepository->persist($offer);
+
+        return new Response('', Response::HTTP_OK);
     }
 
     /**

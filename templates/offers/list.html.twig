@@ -8,6 +8,8 @@
                 <h5 class="card-header">
                     {% if offer.ignored %}
                         <span class="badge badge-danger">Ignorée</span>
+                    {% else %}
+                        <i data-offer-id="{{ offer.id }}" class="star fa-star {% if offer.starred %}fas{% else %}far{% endif %}"></i>
                     {% endif %}
 
                     <span class="badge badge-primary">Leboncoin</span>
