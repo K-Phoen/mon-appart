@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "kphoen/rulerz-bundle": "dev-master",
+        "kphoen/rulerz-bundle": "^0.15",
         "myclabs/php-enum": "^1.6",
         "php-http/httplug-pack": "^1.1",
         "ramsey/uuid": "^3.8",

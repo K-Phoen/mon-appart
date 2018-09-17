@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "811b506d1707dff8d610f1be4df04ee9",
+    "content-hash": "94792e099a5bccf4a2cfa1128b2daff6",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2307,16 +2307,16 @@
         },
         {
             "name": "kphoen/rulerz-bundle",
-            "version": "dev-master",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "b03381906662e0f24e8be146024c2f1e38ab9eba"
+                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/b03381906662e0f24e8be146024c2f1e38ab9eba",
-                "reference": "b03381906662e0f24e8be146024c2f1e38ab9eba",
+                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
+                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
                 "shasum": ""
             },
             "require": {
@@ -2328,7 +2328,7 @@
             "require-dev": {
                 "liip/rmt": "^1.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-                "mikey179/vfsstream": "~1.0",
+                "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^7.1",
                 "symfony/phpunit-bridge": "^3.0|^4.0"
             },
@@ -2359,7 +2359,7 @@
                 "rulerz",
                 "specification"
             ],
-            "time": "2018-04-18T15:42:57+00:00"
+            "time": "2018-09-17T09:02:32+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -4826,6 +4826,7 @@
             ],
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
+            "abandoned": "symfony/flex",
             "time": "2018-04-03T05:04:16+00:00"
         },
         {
@@ -6199,7 +6200,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kphoen/rulerz-bundle": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
