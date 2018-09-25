@@ -8,18 +8,21 @@ use App\Event\NewOfferFound;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Routing\RouterInterface;
 
 class NotifyNewOffers implements EventSubscriberInterface
 {
     private const FROM_EMAIL = 'no-reply@mailgun.kevingomez.fr';
 
     private $mailer;
+    private $router;
     private $destinationMails = [];
     private $titles = [];
 
-    public function __construct(\Swift_Mailer $mailer, array $destinationMails)
+    public function __construct(\Swift_Mailer $mailer, RouterInterface $router, array $destinationMails)
     {
         $this->mailer = $mailer;
+        $this->router = $router;
         $this->destinationMails = $destinationMails;
     }
 
@@ -37,7 +40,11 @@ class NotifyNewOffers implements EventSubscriberInterface
     {
         $offer = $event->offer();
 
-        $this->titles[] = sprintf('<li>%s (%d m², %d €)</li>', $offer->title(), $offer->area(), $offer->price());
+        $this->titles[] = sprintf(
+            '<li><a href="%s">%s (%d m², %d €)</a></li>',
+            $this->router->generate('list_offers').'#offer-'.$offer->id(),
+            $offer->title(), $offer->area(), $offer->price()
+        );
     }
 
     public function flush(): void
