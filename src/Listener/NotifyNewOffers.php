@@ -38,8 +38,8 @@ class NotifyNewOffers implements EventSubscriberInterface
     {
         $offersList = implode(PHP_EOL, $this->titles);
 
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('no-reply@mon-appart')
+        $message = (new \Swift_Message(sprintf('[APPART] %s nouvelles offres ont été trouvées', count($this->titles))))
+            ->setFrom('no-reply@mailgun.kevingomez.fr')
             ->setTo('contact@kevingomez.fr')
             ->setBody(<<<MSG
 <ul>
