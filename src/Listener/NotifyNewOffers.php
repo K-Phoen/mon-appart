@@ -38,6 +38,10 @@ class NotifyNewOffers implements EventSubscriberInterface
 
     public function flush(): void
     {
+        if (empty($this->titles)) {
+            return;
+        }
+
         $offersList = implode(PHP_EOL, $this->titles);
 
         $message = (new \Swift_Message(sprintf('[APPART] %s nouvelles offres ont été trouvées', count($this->titles))))
