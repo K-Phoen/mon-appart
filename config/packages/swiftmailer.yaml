@@ -1,0 +1,3 @@
+swiftmailer:
+    url: 'smtp://%env(MAILGUN_SMTP_SERVER)%:%env(MAILGUN_SMTP_PORT)%?auth_mode=plain&username=%env(MAILGUN_SMTP_LOGIN)%&password=%env(MAILGUN_SMTP_PASSWORD)%'
+    spool: { type: 'memory' }
