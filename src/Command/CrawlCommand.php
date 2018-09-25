@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Crawler\PersistOffers;
+use App\Crawler\EventedCrawler;
 use App\Entity\Offer;
 use App\Search\Request as Search;
 use Symfony\Component\Console\Command\Command;
@@ -16,7 +16,7 @@ class CrawlCommand extends Command
 {
     private $crawler;
 
-    public function __construct(PersistOffers $crawler)
+    public function __construct(EventedCrawler $crawler)
     {
         $this->crawler = $crawler;
 

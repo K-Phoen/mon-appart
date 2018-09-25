@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Crawler;
 
-use App\Crawler\Crawler;
 use App\Entity\Offer;
+use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PersistOffers implements Crawler
 {
     private $decoratedCrawler;
+    private $offerRepo;
     private $em;
 
-    public function __construct(Crawler $decoratedCrawler, EntityManagerInterface $em)
+    public function __construct(Leboncoin $decoratedCrawler, OfferRepository $offerRepo, EntityManagerInterface $em)
     {
         $this->decoratedCrawler = $decoratedCrawler;
         $this->em = $em;
+        $this->offerRepo = $offerRepo;
     }
 
     public function resultsFor(array $criteria): iterable
@@ -36,8 +38,6 @@ class PersistOffers implements Crawler
 
     private function offerExists(Offer $offer): bool
     {
-        $repo = $this->em->getRepository(Offer::class);
-
-        return $repo->findOneByUrl($offer->url()) !== null;
+        return $this->offerRepo->findByUrl($offer->url()) !== null;
     }
 }

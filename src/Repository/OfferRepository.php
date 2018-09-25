@@ -48,6 +48,11 @@ class OfferRepository
         return $this->repo->findOneBy(['id' => $id]);
     }
 
+    public function findByUrl(string $url): ?Offer
+    {
+        return $this->repo->findOneBy(['url' => $url]);
+    }
+
     public function persist(Offer $offer): void
     {
         $this->em->persist($offer);

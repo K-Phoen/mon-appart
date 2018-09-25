@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Crawler\Crawler;
+use App\DependencyInjection\CrawlersPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
