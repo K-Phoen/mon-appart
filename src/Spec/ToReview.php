@@ -8,7 +8,7 @@ use RulerZ\Spec\AbstractSpecification;
 
 class ToReview extends AbstractSpecification
 {
-    public function getRule()
+    public function getRule(): string
     {
         return 'ignored = false';
     }
