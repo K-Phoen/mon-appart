@@ -11,12 +11,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class NotifyNewOffers implements EventSubscriberInterface
 {
+    private const FROM_EMAIL = 'no-reply@mailgun.kevingomez.fr';
+
     private $mailer;
+    private $destinationMails = [];
     private $titles = [];
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(\Swift_Mailer $mailer, array $destinationMails)
     {
         $this->mailer = $mailer;
+        $this->destinationMails = $destinationMails;
     }
 
     public static function getSubscribedEvents()
@@ -33,7 +37,7 @@ class NotifyNewOffers implements EventSubscriberInterface
     {
         $offer = $event->offer();
 
-        $this->titles[] = sprintf('<li>%s</li>', $offer->title());
+        $this->titles[] = sprintf('<li>%s (%d m², %d €)</li>', $offer->title(), $offer->area(), $offer->price());
     }
 
     public function flush(): void
@@ -45,8 +49,8 @@ class NotifyNewOffers implements EventSubscriberInterface
         $offersList = implode(PHP_EOL, $this->titles);
 
         $message = (new \Swift_Message(sprintf('[APPART] %s nouvelles offres ont été trouvées', count($this->titles))))
-            ->setFrom('no-reply@mailgun.kevingomez.fr')
-            ->setTo('contact@kevingomez.fr')
+            ->setFrom(self::FROM_EMAIL)
+            ->setTo($this->destinationMails)
             ->setBody(<<<MSG
 <ul>
     $offersList
