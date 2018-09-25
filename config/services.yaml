@@ -6,6 +6,9 @@
 parameters:
     locale: 'fr'
 
+    router.request_context.host: 'mon-appart.herokuapp.com'
+    router.request_context.scheme: 'https'
+
 services:
     # default configuration for services in *this* file
     _defaults:

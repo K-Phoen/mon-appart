@@ -28,12 +28,11 @@ class NotifyNewOffers implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        // return the subscribed events, their methods and priorities
-        return array(
+        return [
             NewOfferFound::class => 'onNewOfferFound',
             KernelEvents::TERMINATE => 'flush',
             ConsoleEvents::TERMINATE => 'flush',
-        );
+        ];
     }
 
     public function onNewOfferFound(NewOfferFound $event): void
@@ -42,7 +41,7 @@ class NotifyNewOffers implements EventSubscriberInterface
 
         $this->titles[] = sprintf(
             '<li><a href="%s">%s (%d m², %d €)</a></li>',
-            $this->router->generate('list_offers').'#offer-'.$offer->id(),
+            $this->router->generate('list_offers', [], RouterInterface::ABSOLUTE_URL).'#offer-'.$offer->id(),
             $offer->title(), $offer->area(), $offer->price()
         );
     }
