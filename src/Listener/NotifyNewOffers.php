@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listener;
 
 use App\Event\NewOfferFound;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -24,6 +25,7 @@ class NotifyNewOffers implements EventSubscriberInterface
         return array(
             NewOfferFound::class => 'onNewOfferFound',
             KernelEvents::TERMINATE => 'flush',
+            ConsoleEvents::TERMINATE => 'flush',
         );
     }
 
