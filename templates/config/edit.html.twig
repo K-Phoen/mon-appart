@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('build/edit_config.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <div class="card bg-light border-light">
+                <h5 class="card-header">Configuration</h5>
+
+                <div class="card-body">
+                    {{ form_start(configForm) }}
+                    {{ form_row(configForm.notificationsEnabled) }}
+
+                    <h6>
+                        Emails à notifier
+
+                        <button type="button" class="add-another-collection-widget btn btn-sm btn-secondary" data-list="#email-fields-list">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                    </h6>
+
+                    <ul id="email-fields-list"
+                        data-prototype="{{ form_widget(configForm.notificationEmails.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<li></li>'|e }}">
+                    {% for emailField in configForm.notificationEmails %}
+                        <li>
+                            {{ form_errors(emailField) }}
+                            {{ form_widget(emailField) }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+
+                    {% do configForm.notificationEmails.setRendered %}
+
+                    {{ form_end(configForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('build/config.js') }}"></script>
+{% endblock %}

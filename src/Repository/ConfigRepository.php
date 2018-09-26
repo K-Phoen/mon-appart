@@ -26,4 +26,10 @@ class ConfigRepository
     {
         return $this->repo->findOneBy(['id' => Config::MAIN_CONFIG]) ?: new Config();
     }
+
+    public function persist(Config $config): void
+    {
+        $this->em->persist($config);
+        $this->em->flush();
+    }
 }

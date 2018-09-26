@@ -1,4 +1,3 @@
-import '../css/app.scss';
 import $ from 'jquery';
 import 'bootstrap';
 
@@ -17,8 +16,6 @@ $('.star').on('click', function (event) {
     const isStarred = $(this).hasClass('fas');
 
     event.preventDefault();
-
-    console.log(offerId);
 
     $(this).removeClass('fas');
     $(this).removeClass('far');

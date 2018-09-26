@@ -35,14 +35,14 @@ class Config
         return $this->notificationEmails;
     }
 
-    public function enableNotifications(): void
+    public function setNotificationEmails(array $emails): void
     {
-        $this->notificationsEnabled = true;
+        $this->notificationEmails = $emails;
     }
 
-    public function disableNotifications(): void
+    public function setNotificationsEnabled(bool $status): void
     {
-        $this->notificationsEnabled = false;
+        $this->notificationsEnabled = $status;
     }
 
     public function notificationsEnabled(): bool
