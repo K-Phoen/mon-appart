@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listener;
 
 use App\Event\NewOfferFound;
+use App\Repository\ConfigRepository;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -16,14 +17,14 @@ class NotifyNewOffers implements EventSubscriberInterface
 
     private $mailer;
     private $router;
-    private $destinationMails = [];
+    private $configRepo;
     private $titles = [];
 
-    public function __construct(\Swift_Mailer $mailer, RouterInterface $router, array $destinationMails)
+    public function __construct(\Swift_Mailer $mailer, RouterInterface $router, ConfigRepository $configRepo)
     {
         $this->mailer = $mailer;
         $this->router = $router;
-        $this->destinationMails = $destinationMails;
+        $this->configRepo = $configRepo;
     }
 
     public static function getSubscribedEvents()
@@ -52,11 +53,17 @@ class NotifyNewOffers implements EventSubscriberInterface
             return;
         }
 
+        $config = $this->configRepo->mainConfig();
+
+        if (!$config->notificationsEnabled() || empty($config->notificationEmails())) {
+            return;
+        }
+
         $offersList = implode(PHP_EOL, $this->titles);
 
         $message = (new \Swift_Message(sprintf('[APPART] %s nouvelles offres ont été trouvées', count($this->titles))))
             ->setFrom(self::FROM_EMAIL)
-            ->setTo($this->destinationMails)
+            ->setTo($config->notificationEmails())
             ->setBody(<<<MSG
 <ul>
     $offersList

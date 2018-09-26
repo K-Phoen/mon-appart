@@ -32,9 +32,4 @@ services:
 
     App\Crawler\Crawler: '@App\Crawler\EventedCrawler'
 
-    App\Listener\NotifyNewOffers:
-        autowire: true
-        arguments:
-            $destinationMails: ['contact@kevingomez.fr']
-
     RulerZ\RulerZ: '@rulerz'
