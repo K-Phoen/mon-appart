@@ -14,6 +14,7 @@ class Request
         return [
             new Criteria(CriteriaType::AREA(), 50),
             new Criteria(CriteriaType::ROOMS(), 3),
+            new Criteria(CriteriaType::LOCATION(), [CriteriaType::LYON_3, CriteriaType::LYON_7]),
         ];
     }
 }

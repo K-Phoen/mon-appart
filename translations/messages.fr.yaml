@@ -1,2 +1,3 @@
 criteria.rooms: Au moins %value% pièces
 criteria.area: Au moins %value%m²
+criteria.location: Dans %value%

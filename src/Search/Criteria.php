@@ -9,7 +9,7 @@ class Criteria
     /** @var CriteriaType */
     private $type;
 
-    /** @var string|int */
+    /** @var string|int|array */
     private $value;
 
     public function __construct(CriteriaType $type, $value)

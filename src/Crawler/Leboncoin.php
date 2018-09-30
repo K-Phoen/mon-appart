@@ -33,7 +33,7 @@ class Leboncoin implements Crawler
         $request = $this->httpRequestFactory->createRequest('POST', 'https://api.leboncoin.fr/finder/search')
             ->withAddedHeader('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0')
             ->withAddedHeader('api_key', 'ba0c2dad52b3ec')
-            ->withBody(\guzzlehttp\psr7\stream_for(json_encode($this->buildSearch($criteria))));
+            ->withBody(\guzzlehttp\psr7\stream_for(json_encode($this->criteriaConverter->buildSearch($criteria))));
         $response = $this->httpClient->sendRequest($request);
 
         if ($response->getStatusCode() !== 200) {
@@ -46,43 +46,6 @@ class Leboncoin implements Crawler
         foreach ($payload['ads'] as $offer) {
             yield Offer::createFromArray($this->offerToArray($offer));
         }
-    }
-
-    private function buildSearch(array $criteria): array
-    {
-        $search = [
-            'limit' => 35,
-            'limit_alu' => 3,
-            'filters' => [
-                'category' => ['id' => '10'],
-                'enums' => [
-                    'real_estate_type' => ['2'], // flat
-                    'ad_type' => ['offer'],
-                ],
-                'location' => [
-                    'city_zipcodes' => [
-                        [
-                            'city' => 'Lyon',
-                            'label' => 'Lyon (69003)',
-                            'zipcode' => '69003',
-                        ],
-                        [
-                            'city' => 'Lyon',
-                            'label' => 'Lyon (69007)',
-                            'zipcode' => '69007',
-                        ],
-                    ],
-                    'regions' => ['22'],
-                ],
-                'ranges' => [], // to be filled by the criteria
-            ],
-        ];
-
-        foreach ($criteria as $rawCriteria) {
-            $search['filters']['ranges'] += $this->criteriaConverter->criteriaToArray($rawCriteria);
-        }
-
-        return $search;
     }
 
     private function offerToArray(array $offer): array
