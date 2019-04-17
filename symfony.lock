@@ -200,6 +200,9 @@
     "ramsey/uuid": {
         "version": "3.8.0"
     },
+    "rulerz-php/doctrine-orm": {
+        "version": "dev-master"
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
     },
@@ -221,6 +224,9 @@
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
     },
+    "symfony/css-selector": {
+        "version": "v4.2.6"
+    },
     "symfony/debug": {
         "version": "v4.1.3"
     },
@@ -229,6 +235,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.1.3"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.2.6"
     },
     "symfony/dotenv": {
         "version": "v4.1.3"

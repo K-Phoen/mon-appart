@@ -1,4 +1,4 @@
-kphoen_rulerz:
+rulerz:
     cache: "%kernel.cache_dir%/rulerz"
     debug: "%kernel.debug%"
 

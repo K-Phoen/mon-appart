@@ -105,6 +105,7 @@ class Offer
         $offer->description = $data['description'];
         $offer->includingCharges = (bool) $data['is_charges_included'];
         $offer->isFurnished = (bool) $data['is_furnished'];
+        $offer->createdAt = $data['created_at'] ?? $offer->createdAt;
 
         return $offer;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac221b62fe804f5612a0db05d60cd7b9",
+    "content-hash": "5fefb02d2bd1eddf1852e3c40280392f",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -992,12 +992,12 @@
             "version": "v2.6.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
@@ -2237,16 +2237,16 @@
         },
         {
             "name": "kphoen/rulerz",
-            "version": "0.21.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/rulerz.git",
-                "reference": "d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41"
+                "reference": "5c26c4f99636e4e7e464f1b28c8054b059347534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/rulerz/zipball/d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41",
-                "reference": "d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41",
+                "url": "https://api.github.com/repos/K-Phoen/rulerz/zipball/5c26c4f99636e4e7e464f1b28c8054b059347534",
+                "reference": "5c26c4f99636e4e7e464f1b28c8054b059347534",
                 "shasum": ""
             },
             "require": {
@@ -2257,26 +2257,20 @@
             "require-dev": {
                 "behat/behat": "~3.0",
                 "coduo/phpspec-data-provider-extension": "~1.0,!=1.0.2",
-                "doctrine/orm": "~2.4",
-                "elasticsearch/elasticsearch": "~1.0",
-                "illuminate/database": "~5.0",
+                "ext-json": "*",
                 "kphoen/rusty": "dev-master",
                 "liip/rmt": "^1.2",
                 "mikey179/vfsstream": "~1.4",
-                "phpspec/phpspec": "~2.0,>=2.4-dev",
-                "pomm-project/cli": "~2.0@dev",
-                "pomm-project/foundation": "~2.0@dev",
-                "pomm-project/model-manager": "~2.0.@dev",
-                "ruflin/elastica": "~1.0",
-                "solarium/solarium": "~3.0",
-                "vlucas/phpdotenv": "~2.1"
+                "phpspec/phpspec": "~2.0,>=2.4-dev"
             },
             "suggest": {
-                "doctrine/orm": "To execute rules as Doctrine queries",
-                "elasticsearch/elasticsearch": "To execute rules as Elasticsearch queries",
                 "kphoen/rulerz-spec-builder": "If you want a specification builder",
-                "pomm-project/model-manager": "To execute rules as Pomm queries",
-                "solarium/solarium": "To execute rules as Solr queries"
+                "rulerz-php/doctrine-dbal": "To execute rules against Doctrine DBAL targets",
+                "rulerz-php/doctrine-orm": "To execute rules against Doctrine ORM targets",
+                "rulerz-php/elasticsearch": "To execute rules against Elasticsearch targets",
+                "rulerz-php/eloquent": "To execute rules against Eloquent targets",
+                "rulerz-php/pomm": "To execute rules against Pomm targets",
+                "rulerz-php/solarium": "To execute rules against Solarium targets"
             },
             "type": "library",
             "extra": {
@@ -2305,24 +2299,24 @@
                 "doctrine",
                 "specification"
             ],
-            "time": "2018-09-18T15:15:42+00:00"
+            "time": "2018-09-29T11:09:23+00:00"
         },
         {
             "name": "kphoen/rulerz-bridge",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/rulerz-bridge.git",
-                "reference": "70cba7dad3de9d3de42ae2ac99d7f2636d44c871"
+                "reference": "fdad5856b669d59b5e4bda47c4e927a0485bf7a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/rulerz-bridge/zipball/70cba7dad3de9d3de42ae2ac99d7f2636d44c871",
-                "reference": "70cba7dad3de9d3de42ae2ac99d7f2636d44c871",
+                "url": "https://api.github.com/repos/K-Phoen/rulerz-bridge/zipball/fdad5856b669d59b5e4bda47c4e927a0485bf7a0",
+                "reference": "fdad5856b669d59b5e4bda47c4e927a0485bf7a0",
                 "shasum": ""
             },
             "require": {
-                "kphoen/rulerz": "~0.19,>=0.19.3",
+                "kphoen/rulerz": "~0.19,>=0.19.3|^1.0",
                 "php": ">=7.1",
                 "symfony/form": "^3.0|^4.0",
                 "symfony/validator": "^3.0|^4.0"
@@ -2361,24 +2355,24 @@
                 "specification",
                 "symfony"
             ],
-            "time": "2018-04-18T15:31:11+00:00"
+            "time": "2018-10-01T14:17:27+00:00"
         },
         {
             "name": "kphoen/rulerz-bundle",
-            "version": "0.15.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad"
+                "reference": "c9dc901c32cc6049df710dfeb8ceef01153ea3f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
-                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
+                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/c9dc901c32cc6049df710dfeb8ceef01153ea3f1",
+                "reference": "c9dc901c32cc6049df710dfeb8ceef01153ea3f1",
                 "shasum": ""
             },
             "require": {
-                "kphoen/rulerz": "~0.17,>=0.19.3",
+                "kphoen/rulerz": "^1.0",
                 "kphoen/rulerz-bridge": "^1.0",
                 "php": ">=7.1",
                 "symfony/framework-bundle": "^3.0|^4.0"
@@ -2417,7 +2411,7 @@
                 "rulerz",
                 "specification"
             ],
-            "time": "2018-09-17T09:02:32+00:00"
+            "time": "2018-10-01T14:07:50+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -3662,6 +3656,59 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
+            "name": "rulerz-php/doctrine-orm",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rulerz-php/doctrine-orm.git",
+                "reference": "24f56e369e4e0b6a9add3db5762b1bb18b307080"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rulerz-php/doctrine-orm/zipball/24f56e369e4e0b6a9add3db5762b1bb18b307080",
+                "reference": "24f56e369e4e0b6a9add3db5762b1bb18b307080",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4",
+                "kphoen/rulerz": "dev-master as 1.0.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "kphoen/rusty": "dev-master",
+                "liip/rmt": "^1.2",
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RulerZ\\DoctrineORM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr",
+                    "homepage": "http://www.kevingomez.fr/"
+                }
+            ],
+            "description": "Doctrine ORM compilation target for RulerZ",
+            "keywords": [
+                "doctrine",
+                "engine",
+                "orm",
+                "rule",
+                "rulerz",
+                "specification"
+            ],
+            "time": "2018-09-28T21:55:10+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.1.3",
             "source": {
@@ -3977,6 +4024,59 @@
             "time": "2018-09-30T03:38:13+00:00"
         },
         {
+            "name": "symfony/css-selector",
+            "version": "v4.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "48eddf66950fa57996e1be4a55916d65c10c604a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/48eddf66950fa57996e1be4a55916d65c10c604a",
+                "reference": "48eddf66950fa57996e1be4a55916d65c10c604a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony CssSelector Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-01-16T20:31:39+00:00"
+        },
+        {
             "name": "symfony/debug",
             "version": "v4.1.5",
             "source": {
@@ -4182,6 +4282,63 @@
             "description": "Symfony Doctrine Bridge",
             "homepage": "https://symfony.com",
             "time": "2018-09-08T13:24:10+00:00"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v4.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "53c97769814c80a84a8403efcf3ae7ae966d53bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/53c97769814c80a84a8403efcf3ae7ae966d53bb",
+                "reference": "53c97769814c80a84a8403efcf3ae7ae966d53bb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "symfony/css-selector": "~3.4|~4.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DomCrawler Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-02-23T15:17:42+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -6293,9 +6450,32 @@
             "time": "2018-07-26T09:10:45+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "kphoen/rulerz"
+        },
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "kphoen/rulerz-bundle"
+        },
+        {
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0",
+            "version": "9999999-dev",
+            "package": "rulerz-php/doctrine-orm"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kphoen/rulerz": 20,
+        "kphoen/rulerz-bundle": 20,
+        "rulerz-php/doctrine-orm": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
