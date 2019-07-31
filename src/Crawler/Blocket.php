@@ -32,7 +32,7 @@ class Blocket implements Crawler
      */
     public function resultsFor(array $criteria): iterable
     {
-        $url = 'https://www.blocket.se/bostad/uthyres/stockholm/stockholms-stad?sort=&ss=&se=&ros=&roe=&bs=&be=&mre=10000&q=&q=&q=&is=1&save_search=1&l=0&md=th&f=p&f=c&f=b';
+        $url = 'https://www.blocket.se/bostad/uthyres/stockholm/stockholms-stad?cg_multi=3020&sort=&ss=1&se=&ros=&roe=&bs=&be=&mre=12000&q=&q=&q=&is=1&save_search=1&l=0&md=th&f=p&f=c&f=b';
         $request = $this->httpRequestFactory->createRequest('POST', $url)
             ->withAddedHeader('User-Agent', self::USER_AGENT);
         $response = $this->httpClient->sendRequest($request);
