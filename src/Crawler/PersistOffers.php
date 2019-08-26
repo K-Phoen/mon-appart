@@ -14,7 +14,7 @@ class PersistOffers implements Crawler
     private $offerRepo;
     private $em;
 
-    public function __construct(Blocket $decoratedCrawler, OfferRepository $offerRepo, EntityManagerInterface $em)
+    public function __construct(Translator $decoratedCrawler, OfferRepository $offerRepo, EntityManagerInterface $em)
     {
         $this->decoratedCrawler = $decoratedCrawler;
         $this->em = $em;

@@ -27,7 +27,18 @@
                 <div class="card-body">
                     <p class="card-text">
                         <img class="float-left img-thumbnail" style="max-height: 12rem; margin-right: 1rem" src="{{ offer.thumb|default("https://dummyimage.com/180x110/fff/aaa&text=N/A") }}">
-                        {{ offer.description|nl2br }}
+                        {% if offer.translation %}
+                            {{ offer.translation|nl2br }}
+                            <hr />
+
+                            <details>
+                                <summary>Original ({{ offer.language }})</summary>
+
+                                {{ offer.description|nl2br }}
+                            </details>
+                        {% else %}
+                            {{ offer.description|nl2br }}
+                        {% endif %}
                     </p>
                 </div>
 

@@ -71,6 +71,27 @@
     "egulias/email-validator": {
         "version": "2.1.5"
     },
+    "firebase/php-jwt": {
+        "version": "v5.0.0"
+    },
+    "google/auth": {
+        "version": "v1.5.2"
+    },
+    "google/cloud-core": {
+        "version": "v1.32.0"
+    },
+    "google/cloud-translate": {
+        "version": "v1.4.0"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
     "hoa/compiler": {
         "version": "3.17.08.08"
     },
@@ -124,6 +145,9 @@
     },
     "kphoen/rulerz-bundle": {
         "version": "dev-master"
+    },
+    "monolog/monolog": {
+        "version": "1.24.0"
     },
     "myclabs/php-enum": {
         "version": "1.6.2"
@@ -206,8 +230,14 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
+    },
     "ramsey/uuid": {
         "version": "3.8.0"
+    },
+    "rize/uri-template": {
+        "version": "0.3.2"
     },
     "rulerz-php/doctrine-orm": {
         "version": "dev-master"

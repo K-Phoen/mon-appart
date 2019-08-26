@@ -222,6 +222,19 @@ class Offer
         $this->comment = $comment;
     }
 
+    public function withTranslation(string $translation): self
+    {
+        $offer = clone $this;
+        $offer->translated = $translation;
+
+        return $offer;
+    }
+
+    public function translation(): string
+    {
+        return $this->translated;
+    }
+
     public function createdAt(): \DateTimeInterface
     {
         return $this->createdAt;
