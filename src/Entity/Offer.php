@@ -53,9 +53,19 @@ class Offer
     private $thumbUrl = '';
 
     /**
+     * @ORM\Column(type="string", options={"default": ""})
+     */
+    private $language = '';
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description = '';
+
+    /**
+     * @ORM\Column(type="text", options={"default": ""})
+     */
+    private $translated = '';
 
     /**
      * @ORM\Column(type="text", options={"default": ""})
@@ -106,6 +116,7 @@ class Offer
         $offer->includingCharges = (bool) $data['is_charges_included'];
         $offer->isFurnished = (bool) $data['is_furnished'];
         $offer->createdAt = $data['created_at'] ?? $offer->createdAt;
+        $offer->language = $data['language'] ?? '';
 
         return $offer;
     }
@@ -194,6 +205,11 @@ class Offer
     public function description(): string
     {
         return $this->description;
+    }
+
+    public function language(): string
+    {
+        return $this->language;
     }
 
     public function comment(): string
