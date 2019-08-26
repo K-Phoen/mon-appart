@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "google/cloud-translate": "^1.4",
         "kphoen/rulerz": "dev-master as 1.0.0",
         "kphoen/rulerz-bundle": "dev-master as 1.0.0",
         "myclabs/php-enum": "^1.6",

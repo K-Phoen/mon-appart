@@ -53,9 +53,19 @@ class Offer
     private $thumbUrl = '';
 
     /**
+     * @ORM\Column(type="string", options={"default": ""})
+     */
+    private $language = '';
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description = '';
+
+    /**
+     * @ORM\Column(type="text", options={"default": ""})
+     */
+    private $translated = '';
 
     /**
      * @ORM\Column(type="text", options={"default": ""})
@@ -106,6 +116,7 @@ class Offer
         $offer->includingCharges = (bool) $data['is_charges_included'];
         $offer->isFurnished = (bool) $data['is_furnished'];
         $offer->createdAt = $data['created_at'] ?? $offer->createdAt;
+        $offer->language = $data['language'] ?? '';
 
         return $offer;
     }
@@ -196,6 +207,11 @@ class Offer
         return $this->description;
     }
 
+    public function language(): string
+    {
+        return $this->language;
+    }
+
     public function comment(): string
     {
         return $this->comment;
@@ -204,6 +220,19 @@ class Offer
     public function updateComment(string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    public function withTranslation(string $translation): self
+    {
+        $offer = clone $this;
+        $offer->translated = $translation;
+
+        return $offer;
+    }
+
+    public function translation(): string
+    {
+        return $this->translated;
     }
 
     public function createdAt(): \DateTimeInterface

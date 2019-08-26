@@ -81,6 +81,7 @@ class Blocket implements Crawler
         }
 
         return Offer::createFromArray([
+            'language' => 'sv',
             'title' => $title,
             'description' => $this->fetchDescription($url),
             'url' => $url,
