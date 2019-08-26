@@ -33,3 +33,7 @@ services:
     App\Crawler\Crawler: '@App\Crawler\EventedCrawler'
 
     RulerZ\RulerZ: '@rulerz'
+
+    App\Translator:
+        arguments:
+            $key: '%env(GCLOUD_TRANSLATE_KEY)%'
